@@ -264,7 +264,7 @@
 			qcom,dim-mode = "hybrid";
 			qcom,hyb-thres = <625>;
 			qcom,sync-dly-us = <800>;
-			qcom,fs-curr-ua = <25000>;
+			qcom,fs-curr-ua = <27500>;
 			qcom,cons-sync-write-delay-us = <1000>;
 			qcom,led-strings-list = [00 01 02];
 			qcom,loop-auto-gm-en;
@@ -337,7 +337,7 @@
 				qcom,max-current = <500>;
 				qcom,default-led-trigger = "torch0_trigger";
 				qcom,id = <0>;
-				qcom,current-ma = <300>;
+				qcom,current-ma = <80>;
 				qcom,ires-ua = <12500>;
 				qcom,hdrm-voltage-mv = <325>;
 				qcom,hdrm-vol-hi-lo-win-mv = <100>;
@@ -349,7 +349,7 @@
 				qcom,max-current = <500>;
 				qcom,default-led-trigger = "torch1_trigger";
 				qcom,id = <1>;
-				qcom,current-ma = <300>;
+				qcom,current-ma = <80>;
 				qcom,ires-ua = <12500>;
 				qcom,hdrm-voltage-mv = <325>;
 				qcom,hdrm-vol-hi-lo-win-mv = <100>;
@@ -361,7 +361,7 @@
 				qcom,max-current = <500>;
 				qcom,default-led-trigger = "torch2_trigger";
 				qcom,id = <2>;
-				qcom,current-ma = <300>;
+				qcom,current-ma = <50>;
 				qcom,ires-ua = <12500>;
 				qcom,hdrm-voltage-mv = <325>;
 				qcom,hdrm-vol-hi-lo-win-mv = <100>;

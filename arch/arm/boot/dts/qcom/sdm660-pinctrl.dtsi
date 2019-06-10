@@ -758,6 +758,59 @@
 				};
 			};
 		};
+		fps	{
+			fps_int_active: fps_int_active {
+				mux {
+					pins = "gpio72";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio72";
+					drive-strength = <8>; 
+					bias-pull-up;
+				};
+			};
+
+			fps_int_suspend: fps_int_suspend {
+				mux {
+					pins = "gpio72";
+					function = "gpio";
+				};
+
+			config {
+					pins = "gpio72";
+					drive-strength = <2>;
+					bias-pull-down;
+				};
+			};
+
+			fps_reset_active: fps_reset_active {
+				mux {
+					pins = "gpio20";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio20";
+					drive-strength = <8>;
+					bias-pull-up;
+				};
+			};
+
+			fps_reset_suspend1: fps_reset_suspend1 {
+				mux {
+					pins = "gpio20";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio20";
+					drive-strength = <2>;
+					bias-pull-down;
+				};
+			};
+		};
 		/* USB C analog configuration */
 		wcd_usbc_analog_en1 {
 			wcd_usbc_analog_en1_idle: wcd_usbc_ana_en1_idle {
@@ -1104,12 +1157,12 @@
 		cam_tof_active: cam_tof_active {
 			/* LASER */
 			mux {
-				pins = "gpio50", "gpio42", "gpio45";
+				pins = "gpio45";
 				function = "gpio";
 			};
 
 			config {
-				pins = "gpio50", "gpio42", "gpio45";
+				pins = "gpio45";
 				bias-pull-up;
 				drive-strength = <2>; /* 2 MA */
 			};
@@ -1118,12 +1171,12 @@
 		cam_tof_suspend: cam_tof_suspend {
 			/* LASER */
 			mux {
-				pins = "gpio50", "gpio42", "gpio45";
+				pins = "gpio45";
 				function = "gpio";
 			};
 
 			config {
-				pins = "gpio50", "gpio42", "gpio45";
+				pins = "gpio45";
 				bias-pull-down; /* PULL DOWN */
 				drive-strength = <2>; /* 2 MA */
 			};
@@ -1162,12 +1215,12 @@
 		cam_sensor_rear_active: cam_sensor_rear_active {
 			/* RESET, STANDBY */
 			mux {
-				pins = "gpio46","gpio44";
+				pins = "gpio46";
 				function = "gpio";
 			};
 
 			config {
-				pins = "gpio46","gpio44";
+				pins = "gpio46";
 				bias-disable; /* No PULL */
 				drive-strength = <2>; /* 2 MA */
 			};
@@ -1176,12 +1229,12 @@
 		cam_sensor_rear_suspend: cam_sensor_rear_suspend {
 			/* RESET, STANDBY */
 			mux {
-				pins = "gpio46","gpio44";
+				pins = "gpio46";
 				function = "gpio";
 			};
 
 			config {
-				pins = "gpio46","gpio44";
+				pins = "gpio46";
 				bias-disable; /* No PULL */
 				drive-strength = <2>; /* 2 MA */
 			};
@@ -1220,12 +1273,12 @@
 		cam_sensor_rear2_active: cam_sensor_rear2_active {
 			/* RESET, STANDBY */
 			mux {
-				pins = "gpio48","gpio51";
+				pins = "gpio48";
 				function = "gpio";
 			};
 
 			config {
-				pins = "gpio48","gpio51";
+				pins = "gpio48";
 				bias-disable; /* No PULL */
 				drive-strength = <2>; /* 2 MA */
 			};
@@ -1234,11 +1287,11 @@
 		cam_sensor_rear2_suspend: cam_sensor_rear2_suspend {
 			/* RESET, STANDBY */
 			mux {
-				pins = "gpio48","gpio51";
+				pins = "gpio48";
 				function = "gpio";
 			};
 			config {
-				pins = "gpio48","gpio51";
+				pins = "gpio48";
 				bias-disable; /* No PULL */
 				drive-strength = <2>; /* 2 MA */
 			};
@@ -1277,12 +1330,12 @@
 		cam_sensor_front_active: cam_sensor_front_active {
 			/* RESET  VANA*/
 			mux {
-				pins = "gpio47", "gpio44";
+				pins = "gpio47";
 				function = "gpio";
 			};
 
 			config {
-				pins = "gpio47", "gpio44";
+				pins = "gpio47";
 				bias-disable; /* No PULL */
 				drive-strength = <2>; /* 2 MA */
 			};
@@ -1573,7 +1626,31 @@
 				};
 			};
 		};
+		mdss_id_active: mdss_id_active {
+			mux {
+				pins = "gpio68";
+				function = "gpio";
+			};
 
+			config {
+				pins = "gpio68";
+				drive-strength = <2>;
+				bias-disable = <0>;
+			};
+		};
+
+		mdss_id_suspend: mdss_id_suspend {
+			mux {
+				pins = "gpio68";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio68";
+				drive-strength = <2>;
+				bias-disable = <0>;
+			};
+		};
 		pmx_mdss_te {
 			mdss_te_active: mdss_te_active {
 				mux {

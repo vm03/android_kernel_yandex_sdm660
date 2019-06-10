@@ -192,7 +192,12 @@
 			reg = <0x0a800000 0xc8d0>;
 			interrupt-parent = <&intc>;
 			interrupts = <0 131 0>;
+#if 1
+			usb-phy = <&qusb_phy0>, <&usb_nop_phy>;
+			maximum-speed = "high-speed";
+#else
 			usb-phy = <&qusb_phy0>, <&ssphy>;
+#endif
 			tx-fifo-resize;
 			snps,usb3-u1u2-disable;
 			snps,nominal-elastic-buffer;
@@ -305,8 +310,13 @@
 		reset-names = "phy_reset";
 	};
 
+	usb_nop_phy:usb_nop_phy {
+		compatible = "usb-nop-xceiv";
+	};
+
 	ssphy: ssphy@c010000 {
 		compatible = "qcom,usb-ssphy-qmp-v2";
+		status = "disabled";
 		reg = <0xc010000 0xe18>,
 			<0x01fcb244 0x4>,
 			<0x01fcb248 0x4>;
@@ -677,4 +687,12 @@
 
 		status = "disabled";
 	};
+	elan { 
+		compatible = "elan,elan_fp";
+		interrupt-parent = <&tlmm>;
+		interrupts = <72 0x0>;
+		elan,irq-gpio = <&tlmm 72 0x00>;
+		elan,rst-gpio = <&tlmm 20 0x00>;
+		elan,vdd-gpio = <&pm660l_gpios 6 0>;
+		};
 };

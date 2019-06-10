@@ -332,11 +332,10 @@
 
 			qcom,wipower-max-uw = <5000000>;
 			dpdm-supply = <&qusb_phy0>;
-
 			qcom,thermal-mitigation
-					= <3000000 2500000 2000000 1500000
+					= <2000000 1800000 1600000 1400000
 						1000000 500000>;
-
+			qcom,sw-jeita-enable;
 			qcom,chgr@1000 {
 				reg = <0x1000 0x100>;
 				interrupts =
@@ -638,7 +637,7 @@
 			qcom,pmic-revid = <&pm660_revid>;
 			qcom,pmic-misc = <&pm660_misc>;
 			qcom,misc-clk-trim-error-reg = <0xf3>;
-			qcom,actuator-type = "lra";
+			qcom,actuator-type = "erm";
 			qcom,play-mode = "direct";
 			qcom,vmax-mv = <3200>;
 			qcom,ilim-ma = <800>;

@@ -137,8 +137,13 @@
 		dai_mi2s2: qcom,msm-dai-q6-mi2s-tert {
 			compatible = "qcom,msm-dai-q6-mi2s";
 			qcom,msm-dai-q6-mi2s-dev-id = <2>;
-			qcom,msm-mi2s-rx-lines = <0>;
-			qcom,msm-mi2s-tx-lines = <3>;
+			qcom,msm-mi2s-rx-lines = <1>;
+			qcom,msm-mi2s-tx-lines = <2>;
+			pinctrl-names = "default","sleep";
+			pinctrl-0 = <&ter_mi2s_clk_active &ter_mi2s_ws_active
+				&ter_mi2s_sd0_active &ter_mi2s_sd1_active>;
+			pinctrl-1 = <&ter_mi2s_clk_sleep &ter_mi2s_ws_sleep
+				&ter_mi2s_sd0_sleep &ter_mi2s_sd1_sleep>;
 		};
 
 		dai_mi2s5: qcom,msm-dai-q6-mi2s-quin {
@@ -712,6 +717,7 @@
 	tavil_snd: sound-tavil {
 		compatible = "qcom,sdm660-asoc-snd-tavil";
 		qcom,model = "sdm660-tavil-snd-card";
+		qcom,wsa-disable;
 		qcom,wcn-btfm;
 		qcom,mi2s-audio-intf;
 		qcom,auxpcm-audio-intf;
@@ -728,13 +734,13 @@
 			"AMIC4", "MIC BIAS2",
 			"MIC BIAS2", "ANCLeft Headset Mic",
 			"AMIC5", "MIC BIAS3",
-			"MIC BIAS3", "Handset Mic",
+			"MIC BIAS1", "Handset Mic",
 			"DMIC0", "MIC BIAS1",
 			"MIC BIAS1", "Digital Mic0",
 			"DMIC1", "MIC BIAS1",
 			"MIC BIAS1", "Digital Mic1",
-			"DMIC2", "MIC BIAS3",
-			"MIC BIAS3", "Digital Mic2",
+			"DMIC2", "MIC BIAS1",
+			"MIC BIAS1", "Digital Mic2",
 			"DMIC3", "MIC BIAS3",
 			"MIC BIAS3", "Digital Mic3",
 			"DMIC4", "MIC BIAS4",
@@ -807,7 +813,7 @@
 		asoc-codec = <&stub_codec>, <&ext_disp_audio_codec>;
 		asoc-codec-names = "msm-stub-codec.1",
 					"msm-ext-disp-audio-codec-rx";
-		qcom,wsa-max-devs = <2>;
+		qcom,wsa-max-devs = <0>;
 		qcom,wsa-devs = <&wsa881x_0211>, <&wsa881x_0212>,
 				<&wsa881x_0213>, <&wsa881x_0214>;
 		qcom,wsa-aux-dev-prefix = "SpkrLeft", "SpkrRight",
