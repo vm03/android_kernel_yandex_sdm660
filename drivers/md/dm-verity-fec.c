@@ -12,8 +12,7 @@
 #include "dm-verity-fec.h"
 #include <linux/math64.h>
 #include <linux/sysfs.h>
-
-#define DM_MSG_PREFIX	"verity-fec"
+#include "dm-android-verity.h"
 
 /*
  * If error correction has been configured, returns true.
@@ -173,13 +172,16 @@ static int fec_decode_bufs(struct dm_verity *v, struct dm_verity_fec_io *fio,
 done:
 	r = corrected;
 error:
-	if (r < 0 && neras)
+	if (r < 0 && neras){
 		DMERR_LIMIT("%s: FEC %llu: failed to correct: %d",
 			    v->data_dev->name, (unsigned long long)rsb, r);
+		dm_android_verity_report_fec();
+	}
 	else if (r > 0) {
 		DMWARN_LIMIT("%s: FEC %llu: corrected %d errors",
 			     v->data_dev->name, (unsigned long long)rsb, r);
 		atomic_add_unless(&v->fec->corrected, 1, INT_MAX);
+		dm_android_verity_report_fec();
 	}
 
 	return r;

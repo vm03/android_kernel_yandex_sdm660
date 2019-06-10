@@ -942,5 +942,31 @@ static void __exit dm_android_verity_exit(void)
 	dm_unregister_target(&android_verity_target);
 }
 
+int  dm_android_verity_report_fec(void)
+{
+	int r;
+	struct dentry *file;
+
+	r = dm_register_target(&android_verity_target);
+	if (r < 0)
+		DMERR("register failed %d", r);
+
+	/* Tracks the status of the last added target */
+	debug_dir = debugfs_create_dir("fec", NULL);
+
+	if (IS_ERR_OR_NULL(debug_dir)) {
+		DMERR("Cannot create android_verity debugfs directory: %ld",PTR_ERR(debug_dir));			
+		goto end;
+	}
+
+	file = debugfs_create_bool("verity_fec_err", S_IRUGO, debug_dir,&verity_enabled);				
+
+	if (IS_ERR_OR_NULL(file)) {
+		DMERR("Cannot create android_verity debugfs verity_fec_err file.");
+	}
+
+end:	
+	return 0;
+}
 module_init(dm_android_verity_init);
 module_exit(dm_android_verity_exit);
