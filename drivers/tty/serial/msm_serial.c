@@ -40,6 +40,17 @@
 #include <linux/of_device.h>
 #include <linux/wait.h>
 
+#if defined(CONFIG_DYNAMIC_ENABLE_DEBUG_UART)
+static bool uart_enable = false;
+
+static char *cmdline_find_option(char *str)
+{
+	extern char *saved_command_line;
+
+	return strstr(saved_command_line, str);
+}
+#endif
+
 #define UART_MR1			0x0000
 
 #define UART_MR1_AUTO_RFR_LEVEL0	0x3F
@@ -1878,6 +1889,22 @@ static int __init msm_serial_init(void)
 {
 	int ret;
 
+#if defined(CONFIG_DYNAMIC_ENABLE_DEBUG_UART)
+	if (cmdline_find_option("androidboot.user_uart_enable=1")) {
+		uart_enable = true;
+	} else {
+		uart_enable = false;
+	}
+
+	pr_info("[B]%s(%d): uart_enable=%d\n", __func__, __LINE__, uart_enable);
+
+	if (uart_enable) {
+//		msm_uart_driver.cons = MSM_CONSOLE;
+	} else {
+//		msm_uart_driver.cons = NULL;
+		return ret;
+	}
+#endif
 	ret = uart_register_driver(&msm_uart_driver);
 	if (unlikely(ret))
 		return ret;

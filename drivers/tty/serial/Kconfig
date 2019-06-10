@@ -1054,6 +1054,12 @@ config SERIAL_MSM_CONSOLE
 	select SERIAL_CORE_CONSOLE
 	select SERIAL_EARLYCON
 
+config DYNAMIC_ENABLE_DEBUG_UART
+	bool "Dynamic enable debug uart log"
+	depends on SERIAL_MSM=y
+	select SERIAL_CORE_CONSOLE
+	select SERIAL_EARLYCON
+
 config SERIAL_MSM_HS
 	tristate "MSM UART High Speed: Serial Driver"
 	depends on ARCH_QCOM
