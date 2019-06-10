@@ -488,8 +488,17 @@ static void lpi_gpio_dbg_show(struct seq_file *s, struct gpio_chip *chip)
 {
 	unsigned gpio = chip->base;
 	unsigned i;
+	struct pinctrl_dev *pctrl = to_gpio_state(chip)->ctrl;
+        struct pin_desc *desc;
 
 	for (i = 0; i < chip->ngpio; i++, gpio++) {
+   		desc = pin_desc_get(pctrl, i);
+		/* Show only the pins, which are requested using either
+		 * pinctrl_request_gpio (gpio_owner set) or using pinctrl_get
+		 * (mux_owner set).
+		 */
+		if (!desc->gpio_owner && !desc->mux_owner)
+			continue;
 		lpi_gpio_dbg_show_one(s, NULL, chip, i, gpio);
 		seq_puts(s, "\n");
 	}
